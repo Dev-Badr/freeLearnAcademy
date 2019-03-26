@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}{{unit.title}}{% endblock %}
+
+{% block content %}
+
+<div class="row" style="text-align: center;">
+
+	<div class="col-md-8">
+		{% if lecture %}
+			<h3>{{lecture.title}}</h3>
+			<br>
+			<hr>
+			<br>
+			{% for content in lecture.contents.all %}
+				{% with item=content.item %}
+		            <h5>{{ item.title }}</h5>
+		            {{ item.render }}
+		        {% endwith %}
+			{% endfor %}
+			<br/><br/><br/>
+			{{ lecture.views}}
+		{% else %}
+			<h3>مقدمة {{unit.title}}</h3>
+			<br>
+			<hr>
+			<br>
+			<p>In this lecture we can learn new things that we will be learn
+				In this lecture we can learn new things that we will be learn
+				In this lecture we can learn new things that we will be learn
+				In this lecture we can learn new things that we will be learn
+				In this lecture we can learn new things that we will be learn
+				In this lecture we can learn new things that we will be learn
+				In this lecture we can learn new things that we will be learn
+				In this lecture we can learn new things that we will be learn
+				In this lecture we can learn new things that we will be learn.
+			</p>
+		{% endif %}
+	</div>
+	
+	<div class="col-md-4" style="margin-top: 37px;">
+		
+		{% for l in unit.lectures.all %}
+		<ol {% if lecture.slug == l.slug %} class="active"{% endif %}>
+			<a href="{{ l.get_absolute_url }}">
+				<h4>{{ l.title }}<h4></a>
+		</ol>
+		<hr>
+		{% endfor %}
+		
+	</div>
+</div>
+{% endblock %}

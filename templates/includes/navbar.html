@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	{% if user.username == 'admin' %}
+  	<a class="navbar-brand" href="/admin/">Admin</a>
+  {% endif %}
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home:home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'track:dashboard' %}">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'track:track-list' %}">Track</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'track:course-list' %}">Courses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'track:article-list' %}">Articles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'track:practice-list' %}">Practices</a>
+      </li>
+
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="{% if user.profile.photo %}{{ user.profile.photo.url }}{% endif %}" width="30" 
+          	height="32" class="d-inline-block align-top" alt=""> {{user.username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ user.profile.get_absolute_url }}">Profile</a>
+          <a class="dropdown-item" href="{% url 'accounts:edit_account' %}">Settings</a>
+          <a class="dropdown-item" href="{% url 'accounts:password_change' %}">Change Password</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+        </div>
+      </li>
+      {% else %}
+    		<li class="nav-item">
+        	<a class="nav-link" href="{% url 'accounts:login' %}">logIn</a>
+      	</li>
+      {% endif %}
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <a href="{% url 'home:search' %}">Catalog</a>
+      </button>
+    </ul>
+  </div>
+</nav>

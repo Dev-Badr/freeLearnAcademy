@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load track_tags %}
+
+{% block title %}
+{% if track %}{{track.title}} Practices {% else %}Practices{% endif %}
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-8">
+		{% if not category %}
+			<h1>Learn With {% total_practices %} Practices</h1>
+		{% else %}
+			<h1>{{ category.practices.count }} Practices</h1>
+		{% endif %}
+
+				
+			{% for practice in my_object_list %}
+			<a href="{{ practice.get_absolute_url }}">
+				<h3>{{practice.title}}</h3></a>
+			  <p>{{ practice.content }}</p>
+				{% endfor %}
+		</div>
+		{# ################### Cartegories #################### #}
+		<div class="col-md-4">
+		    <div class="sidebar-module">
+				<h4>Categories</h4>
+				<ol class="list-unstyled">
+				  <li {% if not category %} class="active"{% endif %}>
+						<a href="{% url 'track:practice-list' %}">All</a>
+				  </li>
+					{% for c in categories %}
+					  <li {% if category.slug == c.slug %} class="active"{% endif %}>
+						  <a href="{% url 'track:practice_list_by_category' category_slug=c.slug %}">{{ c.title }}</a>
+					  </li>
+					{% endfor %}
+				</ol>
+			</div>
+		</div>
+	</div>
+		
+	{% include "includes/pagination.html" with page=practices %}
+
+{% endblock %}

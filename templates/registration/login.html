@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Login{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            {{ field }}
+            {{ field.errors }}
+            <br>
+        {% endfor %}
+        <input type="submit" value="Login">
+    </form>
+    <p><a href="{% url 'accounts:password_reset' %}">Lost password?</a></p>
+    <p class="text-center">
+        <a href="{% url 'accounts:signup' %}">Create Account</a>
+        |
+        <a href="/">Home Page</a>
+    </p>
+{% endblock %}

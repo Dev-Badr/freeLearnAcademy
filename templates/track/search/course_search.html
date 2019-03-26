@@ -1,0 +1,27 @@
+{% if courses %}
+	
+	{% if not cd == '' %}
+		<div id="header_search">
+			<br/>
+			<h2 id="data">Search containing "{{ cd }}"</h2>
+			<h3 id="total">Found {{ total_results }} result{{ total_results|pluralize }}</h3>
+			<br/>
+		</div>
+	{% endif %}
+
+	{% for course in courses %}
+		<div class="thumbnail">
+			<div class="caption">
+				<h3>
+					<a href="{{ course.get_absolute_url }}">
+						<h2>{{course.title}}</h2>
+					</a>
+					<p>{{ course.content }}</p>
+				</h3>
+			</div>
+			<hr>
+		</div>
+	{% endfor %}
+{% else %}
+    <h3>No results</h3>
+{% endif %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}{{ profile.user.username }} Profile{% endblock %}
+
+{% block content %}
+
+<div class='row' style="padding: 1%">
+
+  <div class="col-md-3">
+      <br>
+    {% if profile.photo %}
+      <img src="{{ profile.photo.url }}" alt="{{profile.user.username}}"
+       width='210px;' height="300px;">
+    {% else %}
+      <h2>No Image</h2>
+    {% endif %}
+    <p>{{profile.bio}} </p>
+    
+  </div>
+
+  <div class="col-md-3">
+    <div>
+      <hr>
+      <h5>username : @{{profile.user.username}}</h5>
+      <hr>
+      <h5>email : {{profile.user.email}}</h5>
+      <hr>
+      <h5>Birth Day: {{profile.date_of_birth}}</h5>
+      <hr>
+      <h5>views {{profile.views}} </h5>
+      <hr>
+      <h5>Gender {{profile.get_gender_display}} </h5>
+      <hr>
+      <h5>GitHub {{profile.get_github_display}} </h5>
+      <hr>
+      <h5>Facebook {{profile.get_facebook_display}} </h5>
+      <hr>
+      <h5>Prevere Languages {{profile.get_prev_languages_display}} </h5>
+    </div>
+    <br>      
+  </div>
+    <div class="col-md-6" style="text-align: center;">
+      <hr>
+      <h5>Last Seen at : {{user.last_login}} </h5>
+      <hr>
+      <h5>Date Joined : {{user.date_joined}} </h5>
+      <br>
+      <h2> {% if courses.count == 0 %} غير مشترك في اي من الكورسات {% else %}
+        {{ profile.user.username }} مشترك في  {{profile.courses.count}} كورس{% endif %}</h2>
+      <br>
+
+      {% for course in profile.courses.all %}
+        <a href="{% url 'track:course-detail' slug=course.slug %}"
+         class="btn btn-lg btn-fill btn-success">
+          <span class="glyphicon glyphicon-remove-circle"></span>
+          عضو في {{ course.title }}
+        </a>
+        <br>
+        <br>
+      {% endfor %}
+      
+    </div>
+  
+</div>
+
+	
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

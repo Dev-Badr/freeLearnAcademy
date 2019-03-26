@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{# All Auth #}
+{# {% load socialaccount %} #}
+
+{% block title %}الرئيسية{% endblock %}
+
+{% block js %}
+  {% include 'includes/registrations.js' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="padding: 1%">
+      <div class="col-md-4">
+        <h3 style="text-align: center;">قم بإنشاء حساب جديد الآن</h3>
+        <br>
+        <form method="POST" style="text-align: center;">
+        {% csrf_token %}
+        <p id="u-error" style="color: red"></p>
+        <p id="e-error" style="color: red"></p>
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            {{ field }}
+          {{ field.errors }}
+          <br>
+        {% endfor %}
+
+        <input class="btn btn-md" type="submit" value="Sign up"
+          style="background-color: black;color:white">
+        <br/>
+
+        {% comment %}
+        <a href="{% provider_login_url 'github' %}">Sign Up Github</a>
+
+        <input class='btn btn-md btn-success' type="submit" 
+          value="Login with Facebook">
+        <br>
+        <br>
+        <input class='btn btn-md btn-success' type="submit" 
+          value="Login with GitHub">
+        {% endcomment %}
+        <hr>
+        <h4>Already have account <a href="{% url 'accounts:login' %}">login</a></h4>
+        </form>
+      </div>
+      <div class="col-md-8">
+        <h3 style="text-align: right;">
+        انضم الي اكثر من {{users}} متعلم من جميع انحاء العالم</h3>
+
+      </div>
+      <br>
+    </div>
+{% endblock %}

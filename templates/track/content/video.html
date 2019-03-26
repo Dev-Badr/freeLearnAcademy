@@ -1,0 +1,15 @@
+{% comment %}
+Install the package with the following command:
+pip install django-embed-video==1.0.0
+Then, edit the 
+settings.py
+ file of your project and add 
+'embed_video'
+ to the 
+INSTALLED_APPS
+setting. You can find django-embed-video's documentation at 
+http://django-embed-video.readthedocs.org/en/v1.0.0/
+{% endcomment %}
+
+{% load embed_video_tags %}
+{% video item.url '720 x 480' %}

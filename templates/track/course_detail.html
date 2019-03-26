@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}{{course.title}}{% endblock %}
+
+{% block content %}
+
+{# course overview #}
+{% if not user.profile in course.profile.all %}
+  <header id="header" style="margin-bottom: 6%">
+    <h3>{{ course.title }}</h3>  
+  </header><!-- /header -->
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>Overview</h2>
+      <p>video here</p>
+      <p>{{ course.overview }}</p>
+      <p>lorim ipsom jsahd jsd nw u wieq jnwe h uqwhe jn wejh wjeqweh
+        sadkl asjd kjkashdjasd uiwey ubw kw eqwh je heqw uy uy uyw uqwue
+        pwe opqwei oeqwei io  jtrnj ren herj  hjewrer hjer kwrhe kewrj hke
+        sadkl asjd kjkashdjasd uiwey ubw kw eqwh je heqw uy uy uyw uqwue
+        pwe opqwei oeqwei io  jtrnj ren herj  hjewrer hjer kwrhe kewrj hke
+        sadkl asjd kjkashdjasd uiwey ubw kw eqwh je heqw uy uy uyw uqwue
+        pwe opqwei oeqwei io  jtrnj ren herj  hjewrer hjer kwrhe kewrj hke
+        sadkl asjd kjkashdjasd uiwey ubw kw eqwh je heqw uy uy uyw uqwue
+        pwe opqwei oeqwei io  jtrnj ren herj  hjewrer hjer kwrhe kewrj hke
+        sadkl asjd kjkashdjasd uiwey ubw kw eqwh je heqw uy uy uyw uqwue
+        pwe opqwei oeqwei io  jtrnj ren herj  hjewrer hjer kwrhe kewrj hke
+        sadkl asjd kjkashdjasd uiwey ubw kw eqwh je heqw uy uy uyw uqwue
+        pwe opqwei oeqwei io  jtrnj ren herj  hjewrer hjer kwrhe kewrj hke
+        sadkl asjd kjkashdjasd uiwey ubw kw eqwh je heqw uy uy uyw uqwue
+        pwe opqwei oeqwei io  jtrnj ren herj  hjewrer hjer kwrhe kewrj hke.
+      </p>
+
+      {# Join Track #}
+      
+      <a href="{% url 'track:join' slug=course.slug %}"
+       class="btn btn-md btn-success">
+      <span class="glyphicon glyphicon-ok-circle"></span>ENROLL NOW</a>
+      
+    </div>
+  
+    <div class="col-sm-4 col-sm-offset-1 blog-sidebar">
+      <div class="sidebar-module">
+        <h4>Course Content</h4>
+        <ol class="list-unstyled">
+          {% for unit in course.units.all %}
+            <li>
+              <h5>{{unit.title}}</h5>
+              <p>{{unit.content}}</p>
+            </li>
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+  </div>
+{% else %}
+
+
+  {# course detail #}
+  
+  <div class="row">
+    
+    <div class="col-md-8" style="text-align: center;">
+      {% for unit in course.units.all %}
+      <a href="{{ unit.get_absolute_url }}"><h2>{{unit.title}}</h2></a>
+      <!-- <p>{{unit.content}}</p> -->
+      <ol class="list-unstyled">
+        {% for lecture in unit.lectures.all %}
+          <li>
+            <a href="{{ lecture.get_absolute_url }}"><p>{{lecture.title}}</p></a>
+          </li>
+        {% endfor %}
+      </ol>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-4">
+      <h5>Active students {{ course.profile.count }}</h5>
+      <h5>lectures 2/24</h5>
+      <h5>points 80/240</h5>
+      <p>course information.</p>
+      <a href="{% url 'track:leave' slug=course.slug %}"
+       class="btn btn-lg btn-fill btn-warning">
+        <span class="glyphicon glyphicon-remove-circle"></span>
+       مغادرة {{ course.title }}
+      </a>
+    </div>
+    
+  </div>
+
+{% endif %}
+
+ {% endblock %}}

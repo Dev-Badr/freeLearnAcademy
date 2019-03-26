@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block content %}
+	<h2>{{ article.title }} detail</h2>
+  <p>{{ article.content }}</p>
+  <p>elsd qwj  wjwqlkje lkwjqe jkwl jelwkqj lkjwekljwqekljw j wjeqbnemnbc-owq nwme nqwben wqejkqwhe jkqwhejh jwhebnwqe iocamn kewjdpo kdwhq m bnwjqe m nwqgewe gwqje nwe 
+  wqejkqwhe jkqwhejh jwhebnwqe iocamn kewjdpo kdwhq m bnwjqe m nwqgewe gwqje nwe 
+  wqejkqwhe jkqwhejh jwhebnwqe iocamn kewjdpo kdwhq m bnwjqe m nwqgewe gwqje nwe 
+  wqejkqwhe jkqwhejh jwhebnwqe iocamn kewjdpo kdwhq m bnwjqe m nwqgewe gwqje nwe 
+  wqejkqwhe jkqwhejh jwhebnwqe iocamn kewjdpo kdwhq m bnwjqe m nwqgewe gwqje nwe 
+  wqejkqwhe jkqwhejh jwhebnwqe iocamn kewjdpo kdwhq m bnwjqe m nwqgewe gwqje nwe hwuehqwue </p>
+  <br>
+  <h4>views {{article.views}} </h4>
+	<hr>
+    <p class="tags">
+      Tags:
+      {% for tag in article.tags.all %}
+          <a href="{% url 'track:article_list_by_tag' tag_slug=tag.slug %}">
+          {{ tag.name }}
+          </a>
+        {% if not forloop.last %}, {% endif %}
+      {% endfor %}
+   </p>
+
+  <br>
+  <h2>Similar Articles</h2>
+  <hr>
+  <div class="row">
+    {% for article in similar_articles %}
+      <div class="col-sm-3">
+        <p><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></p>
+        <p><span>{{ article.content }}</span></p>
+      </div>
+    {% empty %}
+      There are no similar article yet.
+    {% endfor %}
+  </div>
+ {% endblock %}

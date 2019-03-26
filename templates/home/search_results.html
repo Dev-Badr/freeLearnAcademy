@@ -1,0 +1,51 @@
+{% if articles or courses or users %}
+	<br/>
+	<h2 id="data">Search containing "{{ cleandata }}"</h2>
+	<h3 id="total">Found {{ total_results }} result{{ total_results|pluralize }}</h3>
+	<br/>
+
+	{% if courses %}
+		<h3>Courses</h3>
+		{% for course in courses %}
+			<div class="card w-80">
+			  <div class="card-body">
+			    <h5 class="card-title">{{ course.title }}</h5>
+			    <hr/>
+			    <p class="card-text">{{ course.content|truncatewords:8 }}</p>
+			    <a href="{{ article.get_absolute_url }}" class="btn btn-primary">GO To Course</a>
+			  </div>
+			</div>
+			<br/>
+		{% endfor %}
+	{% endif %}
+
+	{% if articles %}
+		<h3>Articles</h3>
+		{% for article in articles %}
+			<div class="card w-80">
+			  <div class="card-body">
+			    <h5 class="card-title">{{ article.title }}</h5>
+			    <hr/>
+			    <p class="card-text">{{ article.content|truncatewords:8 }}</p>
+			    <a href="{{ article.get_absolute_url }}" class="btn btn-primary">Read full article</a>
+			  </div>
+			</div>
+			<br/>
+		{% endfor %}
+	{% endif %}
+
+	{% if users %}
+		<h3>Profiles</h3>
+		{% for user in users %}
+		    <div>
+		    <img width="40" height="50" alt="" src="{{ user.profile.photo.url }}">
+		    <a href="{{ user.profile.get_absolute_url }}" class="btn btn-primary">
+		    	{{ user.username }}</a>
+		    </div>
+		    <br/>
+		{% endfor %}
+	{% endif %}
+
+{% else %}
+    <h3>No results</h3>
+{% endif %}

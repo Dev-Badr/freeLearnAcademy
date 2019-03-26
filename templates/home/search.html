@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Search{% endblock %}
+
+
+
+{% block js %}
+    <script type="text/javascript">
+
+            $("#sform").submit(function(e){
+                e.preventDefault()
+            });
+
+            $("#name").on('input', function(){
+
+                if ($(this).val().length > 0) {
+                    $("#searchresults").html("<h5 style = 'margin: 25px;'>Typing...</h5>");
+                    
+                    clearTimeout(this.delay);
+                    this.delay = setTimeout(function(){
+
+                        $.ajax({
+                            url: "{% url 'home:search-results' %}",
+                            method: "post",
+                            data: $(this).parent().serialize(),
+                            success: function(data) {
+                                $("#searchresults").html(data);
+                            }
+                        });
+
+                    }.bind(this), 800);
+                } else {
+                    $("#searchresults").html("<h2>Search For Courses, Articles And Profiles.<h2>");
+                }
+            });
+
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    
+    <div id = "wrapper">
+
+        <div class="row">
+            <div class="col-md-8">
+            <div id = "searchforms">
+                <form method = "post" id = "sform">
+                    {% csrf_token %}
+                    <h3>Search</h3>
+                    <input type="text" name="q" id="name" style="width: 80%"><br/><br/>
+                </form>
+                <a href="/">Back</a>
+            </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+            <hr>
+                <div id = "searchresults"></div>
+            </div>
+            <div class="col-md-4">
+                <h3>Categories</h3>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

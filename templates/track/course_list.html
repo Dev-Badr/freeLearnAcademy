@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load track_tags %}
+{% block title %}All Course{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$("#searchform").submit(function(e){
+	            e.preventDefault()
+	    	});
+
+
+		$("#search").on('input', function(){
+
+			if ($(this).val().length > 0) {
+				$("#searchresults").html("<h5 style='margin: 25px;'>Typing...</h5>");
+
+			    clearTimeout(this.delay);
+			    this.delay = setTimeout(function(){
+			        $.ajax({
+		                url: "{% url 'track:course_search' %}",
+		                method: "post",
+		                data: $(this).parent().serialize(),
+		                success: function(data) {
+				            $("#searchresults").html(data);
+		                }
+		            });
+
+			    }.bind(this), 800);
+			} else {
+				$.ajax({
+	                url: "{% url 'track:course_search' %}",
+	                method: "post",
+	                data: $(this).parent().serialize(),
+	                success: function(data) {
+			            $("#searchresults").html(data);
+	                }
+		        });
+			}
+		});
+	});
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+	<h2>We Have More Than {% total_courses %} Courses</h2><hr/>
+  	<div class="row">
+  		<div class="col-md-8" id="searchresults">
+  		{% for course in object_list %}
+		    <ul>
+		      <a href="{{ course.get_absolute_url }}"><h2>{{course.title}}</h2></a>
+		      <p>{{course.content}}</p>
+		      <p>{{course.profile.count}} Member In</p>
+		    </ul>
+		{% endfor %}
+		</div>
+
+		<div class="col-sm-4">
+			<div>
+			    <h3>Search for Courses</h3>
+				<form method="POST" id="searchform">
+					{% csrf_token %}
+				  <input type="text" name="q" id="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</div>
+
+  {% include "includes/pagination.html" with page=courses %}
+
+{% endblock %}

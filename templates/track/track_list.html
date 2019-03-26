@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load track_tags %}
+{% block title %}All Tracks{% endblock %}
+
+{% block content %}
+<!-- <h4>This is our Platform. We have estaplish {% total_tracks %} tracks so far.</h4> -->
+<div class="row">
+  {% for track in object_list %}
+  	<div class="col-md-4">
+	  	<div class="card text-center">
+		  <div class="card-header">
+		    Featured
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title">{{ track.title }}</h5>
+		    <p class="card-text">{{ track.content }}</p>
+		    <a href="{{ track.get_absolute_url }}" class="btn btn-primary">Join Track</a>
+		  </div>
+		  <div class="card-footer text-muted">
+		    {{ track.updated_at }}
+		  </div>
+		</div>
+	</div>
+  {% endfor %}
+</div>
+{% endblock %}

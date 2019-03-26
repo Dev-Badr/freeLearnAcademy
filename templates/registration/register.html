@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block js %}
+    {% include 'includes/registrations.js' %}
+{% endblock %}
+
+{% block content %}
+
+<form class = "register-form" method="POST" style="text-align: center">
+    <div class="col-md-6" style="display: inline-block;">
+        {% csrf_token %}
+        <p id="u-error" style="color: red"></p>
+        <p id="e-error" style="color: red"></p>
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            {{ field }}
+            {{ field.errors }}
+            <br>
+        {% endfor %}
+        <input type="submit" value='Signup'>
+    </div>
+</form>
+{% endblock %}
