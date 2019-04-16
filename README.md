@@ -1,3 +1,5 @@
+# freeLearnAcademy
+
 ### [Join our community here](https://www.freelearnacademy.org/signin).
 
 ### Found a bug?
