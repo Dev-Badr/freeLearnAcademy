@@ -100,7 +100,7 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.postgresql',
     #     'NAME': 'platform',
     #     'USER': 'postgres' ,
-    #     'PASSWORD': "bks01124680  " ,
+    #     'PASSWORD': os.environ.get('db_PASSWORD') ,
     #     'HOST' : 'localhost' ,
     #     'PORT' : '5431',
     #     'charset': 'utf8mb4',
@@ -175,8 +175,8 @@ LOCALE_PATH = [
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'badrk.shokr@gmail.com'
-EMAIL_HOST_PASSWORD = 'bks..01124124680'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT = 587
 
 
