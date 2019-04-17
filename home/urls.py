@@ -8,6 +8,4 @@ urlpatterns = [
 	path('', home, name='home'),
 	path('search/', home_search, name='search'),
 	path('search-results/', search_results, name='search-results'),
-	
-	# path('search/', HomeSearch.as_view(), name='search'),
-]
+	]
