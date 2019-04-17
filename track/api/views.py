@@ -1,12 +1,13 @@
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from track.models import Track, Course, Unit
+from track.models import Track, Course, Unit, Lecture
 
 from track.api.serializers import (
 	TrackSerializer,
 	CourseSerializer,
 	UnitSerializer,
+	LectureSerializer,
 	)
 
 
@@ -49,6 +50,18 @@ class CourseDetail(RetrieveAPIView):
 	serializer_class = CourseSerializer
 
 ######################################
+
+# unit
+
+class UnitList(ListAPIView):
+	queryset = Unit.objects.all()
+	serializer_class = UnitSerializer
+
+class UnitDetail(RetrieveAPIView):
+	queryset = Unit.objects.all()
+	serializer_class = UnitSerializer
+
+#######################################
 
 # unit
 
