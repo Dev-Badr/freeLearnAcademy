@@ -63,15 +63,15 @@ class UnitDetail(RetrieveAPIView):
 
 #######################################
 
-# unit
+# lecuture
 
-class UnitList(ListAPIView):
-	queryset = Unit.objects.all()
-	serializer_class = UnitSerializer
+class LectureList(ListAPIView):
+	queryset = Lecture.objects.all()
+	serializer_class = LectureSerializer
 
-class UnitDetail(RetrieveAPIView):
-	queryset = Unit.objects.all()
-	serializer_class = UnitSerializer
+class LectureDetail(RetrieveAPIView):
+	queryset = Lecture.objects.all()
+	serializer_class = LectureSerializer
 
 #######################################
 
