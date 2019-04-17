@@ -1,7 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from track.models import Track, Course, Unit, Lecture, CourseMember
+from track.models import Track, Course, Unit, Lecture, CourseMember, \
+			 Category,
 
 from track.api.serializers import (
 	TrackSerializer,
@@ -9,6 +10,7 @@ from track.api.serializers import (
 	UnitSerializer,
 	LectureSerializer,
 	CourseMemberSerializer,
+	CategorySerializer,
 	)
 
 
@@ -85,6 +87,18 @@ class CourseMemberList(ListAPIView):
 class CourseMemberDetail(RetrieveAPIView):
 	queryset = CourseMember.objects.all()
 	serializer_class = CourseMemberSerializer
+
+#######################################
+
+# category
+
+class CategoryList(ListAPIView):
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
+
+class CategoryDetail(RetrieveAPIView):
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
 
 #######################################
 
