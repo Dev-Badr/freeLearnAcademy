@@ -1,10 +1,15 @@
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from track.models import Track
-from track.api.serializers import TrackSerializer
+from track.models import Track, Course
 
-# manualy
+from track.api.serializers import (
+	TrackSerializer,
+	CourseSerializer,
+	)
+
+
+# get & post manualy
 # from rest_framework.views import APIView
 # from rest_framework import status
 
@@ -20,6 +25,8 @@ from track.api.serializers import TrackSerializer
 # 		serializer.save()
 # 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+# track
+
 class TrackList(ListAPIView):
 	queryset = Track.objects.all()
 	serializer_class = TrackSerializer
@@ -27,6 +34,21 @@ class TrackList(ListAPIView):
 class TrackDetail(RetrieveAPIView):
 	queryset = Track.objects.all()
 	serializer_class = TrackSerializer
+
+######################################
+
+# course
+
+class CourseList(ListAPIView):
+	queryset = Course.objects.all()
+	serializer_class = CourseSerializer
+
+class CourseDetail(RetrieveAPIView):
+	queryset = Course.objects.all()
+	serializer_class = CourseSerializer
+
+######################################
+
 
 # The ModelViewSet class inherits from GenericAPIView and includes implementations for various actions,
 # by mixing in the behavior of the various mixin classes.
