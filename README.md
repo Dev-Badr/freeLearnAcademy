@@ -1,6 +1,5 @@
 # freeLearnAcademy
 
-### [Join our community here](https://www.freelearnacademy.org/signin).
 
 ### Found a bug?
 
@@ -11,7 +10,3 @@ If you think you've found a bug, If you're confident it's a new bug, and have co
 Please don't create GitHub issues for security issues. Instead, please send an email to `badrk.shokr@gmail.com` and we'll look into it immediately.
 
 #### It is run by [Dev-Badr](https://github.com/Dev-Badr).
-
-### License
-
-Copyright © 2019 freeLearnAcademy.org
