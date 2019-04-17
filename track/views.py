@@ -139,7 +139,7 @@ class LeaveCourse(LoginRequiredMixin, RedirectView):
 			)
 		return super().get(request, *args, **kwargs)
 
-## Wow handling 2 model with this class
+# this class handel tow models (Article, Practice)
 class ModelListView(ListView):
 
 	model = None
@@ -150,9 +150,8 @@ class ModelListView(ListView):
 		context = super(ModelListView, self).get_context_data(**kwargs)
 
 		# by default articles context sent when > model = Article
-		# but the trick is we don't want to make html file compelex
+		# but we don't want to make html file compelex
 		# we make 1 for loop
-		# in future we must send category, tags and object_list only.
 
 		my_object_list = self.model.published.all()
 		context['categories'] = Category.objects.all()
@@ -191,7 +190,7 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
 
 	model = Article
  
-	# the trick is user can reads 2000 articles
+	# user can reads 2000 articles
 	# even we have just 1 article by refresh the page
 
 	# def get(self, request, *args, **kwargs):
