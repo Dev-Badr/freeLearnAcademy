@@ -56,6 +56,6 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_header = _(" Badr Admin Panel")
-admin.site.site_title =_( " Badr App Admin")
-admin.site.site_index_title = _(" Welcome To Badr Admin Panel")
+admin.site.site_header = _(" freeLearnAcademy Admin Panel")
+admin.site.site_title =_( " freeLearnAcademy App Admin")
+admin.site.site_index_title = _(" Welcome To freeLearnAcademy Admin Panel")
