@@ -1,4 +1,3 @@
-# import random
 from .models import *
 from django.http import HttpResponse
 from django.views.generic import View, RedirectView, TemplateView
@@ -53,7 +52,7 @@ class UnitDetailView(LoginRequiredMixin, DetailView):
 		profile = self.request.user.profile
 		if not profile.courses.filter(profile=profile):
 			messages.warning(
-				self.request, "برجاء التسجيل اولا لتتمكن من الدخول الي الكورس.")
+				self.request, "Please register first to be able to access the content of the course.")
 
 			return redirect("track:course-detail", slug=self.kwargs.get("course_slug"))
 		return super(UnitDetailView, self).dispatch(request, *args, **kwargs)
@@ -73,10 +72,9 @@ class UnitDetailView(LoginRequiredMixin, DetailView):
 			unit.entered(lecture.id)
 			profile.entered(lecture.id)
 		else:
-			# get the id for the last lecture
+			# get the last lecture id.
 			lecture_id = unit.last_lecture
-			# if statment here coz the first time user entered the unit
-			# he no lecture is given
+			# The first time user entered the unit will redirect to introduction to module
 			if lecture_id:
 				lecture =  unit.lectures.get(id=lecture_id)
 		lecture.viewed()
@@ -86,7 +84,7 @@ class UnitDetailView(LoginRequiredMixin, DetailView):
 		return context
 		
 
-# JOIN AND LEAVE TRACKS
+# JOIN THE TRACK
 class JoinCourse(LoginRequiredMixin, RedirectView):
 
 	def get_redirect_url(self, *args, **kwargs):
@@ -105,14 +103,14 @@ class JoinCourse(LoginRequiredMixin, RedirectView):
 
 		except IntegrityError:
 			messages.warning(self.request,(
-				"انت عضو في  {} بالفعل.".format(course.title)))
+				"You are already a member of {}.".format(course.title)))
 		else:
 			messages.success(self.request,
-				"اصبحت الآن عضو في {}.".format(course.title))
+				"You are now a member of {}.".format(course.title))
 
 		return super().get(request, *args, **kwargs)
 
-
+# LEAVE THE TRACK
 class LeaveCourse(LoginRequiredMixin, RedirectView):
 
 	def get_redirect_url(self, *args, **kwargs):
@@ -130,16 +128,16 @@ class LeaveCourse(LoginRequiredMixin, RedirectView):
 			profile.entered(None)
 		except CourseMember.DoesNotExist:
 			messages.warning(
-				self.request, "انت لست مسجل بهذا الكورس."
+				self.request, "You are not registered in this course."
 			)
 		else:
 			membership.delete()
 			messages.success(
-				self.request, "تم مغادرة الكورس بنجاح."
+				self.request, "You successfully left the course."
 			)
 		return super().get(request, *args, **kwargs)
 
-# this class handel tow models (Article, Practice)
+# this class handel two models (Article, Practice)
 class ModelListView(ListView):
 
 	model = None
@@ -149,9 +147,9 @@ class ModelListView(ListView):
 
 		context = super(ModelListView, self).get_context_data(**kwargs)
 
-		# by default articles context sent when > model = Article
-		# but we don't want to make html file compelex
-		# we make 1 for loop
+		# By default context articles are sent when we assign variable model = article
+		# But we do not want to make a complex HTML file
+		# We make one loop "for 2 models" (Article, Practice)
 
 		my_object_list = self.model.published.all()
 		context['categories'] = Category.objects.all()
@@ -160,7 +158,7 @@ class ModelListView(ListView):
 		context['tags'] = Tag.objects.\
 			annotate(num=Count('taggit_taggeditem_items')).order_by('-num')[:10]
 
-		# 3 variables to get specific articles
+		# 3 variables for specific articles
 		track_slug = self.kwargs.get("track_slug")
 		category_slug = self.kwargs.get("category_slug")
 		tag_slug = self.kwargs.get("tag_slug")
@@ -172,13 +170,15 @@ class ModelListView(ListView):
 		if category_slug:
 			category = get_object_or_404(Category, slug=category_slug)
 			my_object_list = self.model.published.filter(category=category).all()
-			# to know what category is active
+
+			# To find out what category is active
 			context['category'] = category
 
 		if tag_slug:
 			tag =  get_object_or_404(Tag, slug=tag_slug)
 			my_object_list = Article.published.filter(tags=tag).all()
-			# to know what tag is active
+
+			# To find out what category is active
 			context['tag'] = tag
 
 		context['my_object_list'] = my_object_list
@@ -215,9 +215,10 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
 		similar_articles = Article.published.filter(
 								tags__in=article_tags_ids)\
 									.exclude(id=article.id)
+
 		context['similar_articles'] = similar_articles.annotate(
 										same_tags=Count('tags'))\
-										.order_by('-same_tags','-created_at')[:3]
+											.order_by('-same_tags','-created_at')[:3]
 		return context
 
 
@@ -225,8 +226,7 @@ class PracticeDetailView(LoginRequiredMixin, DetailView):
 	model = Practice
 	
 
-# ERROR-PAGES ###################################################################
-
+# ERROR-PAGE
 # def page_not_found_view(request, exception, template_name='error_page.html'):
 #     if exception:
 #         logger.error(exception)
