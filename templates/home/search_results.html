@@ -1,6 +1,6 @@
 {% if articles or courses or users %}
 	<br/>
-	<h2 id="data">Search containing "{{ cleandata }}"</h2>
+	<h2 id="data">Search containing "{{ cleandata|safe }}"</h2>
 	<h3 id="total">Found {{ total_results }} result{{ total_results|pluralize }}</h3>
 	<br/>
 

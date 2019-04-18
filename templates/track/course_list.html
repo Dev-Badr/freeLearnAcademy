@@ -20,7 +20,7 @@
 			    this.delay = setTimeout(function(){
 			        $.ajax({
 		                url: "{% url 'track:course_search' %}",
-		                method: "post",
+		                method: "get",
 		                data: $(this).parent().serialize(),
 		                success: function(data) {
 				            $("#searchresults").html(data);
@@ -31,7 +31,7 @@
 			} else {
 				$.ajax({
 	                url: "{% url 'track:course_search' %}",
-	                method: "post",
+	                method: "get",
 	                data: $(this).parent().serialize(),
 	                success: function(data) {
 			            $("#searchresults").html(data);
@@ -46,27 +46,38 @@
 
 
 {% block content %}
-	<h2>We Have More Than {% total_courses %} Courses</h2><hr/>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<h3>Search about {% total_courses %} Courses</h3>
+		</div>
+		<div class="col-sm-6">
+			<form id="searchform">
+			  <input type="text" name="q" id="search" placeholder="Search...">
+			</form>
+		</div>
+	</div>
+	<hr>
+
   	<div class="row">
+
   		<div class="col-md-8" id="searchresults">
-  		{% for course in object_list %}
-		    <ul>
-		      <a href="{{ course.get_absolute_url }}"><h2>{{course.title}}</h2></a>
-		      <p>{{course.content}}</p>
-		      <p>{{course.profile.count}} Member In</p>
-		    </ul>
-		{% endfor %}
+	  		{% for course in object_list %}
+
+		    	<!-- <div class="col-md-6"> -->
+	              <div class="card">
+	                <a href="{{ course.get_absolute_url }}">
+	                  <div class="card-header"><h5>{{ course.title }}</h5></div>
+	                </a>
+	                <div class="card-body">{{ course.content|truncatechars:115 }}</div> 
+	                <div class="card-footer"><p>{{course.profile.count}} Member In</p></div>
+	              </div>
+	              <br>
+	        	<!-- </div> -->
+
+			{% endfor %}
 		</div>
 
-		<div class="col-sm-4">
-			<div>
-			    <h3>Search for Courses</h3>
-				<form method="POST" id="searchform">
-					{% csrf_token %}
-				  <input type="text" name="q" id="search" placeholder="Search...">
-				</form>
-			</div>
-		</div>
 	</div>
 
   {% include "includes/pagination.html" with page=courses %}

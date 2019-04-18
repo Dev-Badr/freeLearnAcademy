@@ -22,7 +22,7 @@
 			    this.delay = setTimeout(function(){
 			        $.ajax({
 		                url: "{% url 'track:article_search' %}",
-		                method: "post",
+		                method: "get",
 		                data: $(this).parent().serialize(),
 		                success: function(data) {
 				            $("#searchresults").html(data);
@@ -33,7 +33,7 @@
 			} else {
 				$.ajax({
 	                url: "{% url 'track:article_search' %}",
-	                method: "post",
+	                method: "get",
 	                data: $(this).parent().serialize(),
 	                success: function(data) {
 			            $("#searchresults").html(data);
@@ -48,34 +48,37 @@
 
 {% block content %}
 	
-	<h2>We Have More Than {% total_articles %} Articles</h2><hr/>
+	<div class="row">
+		<div class="col-sm-6">
+			<h3>Search about {% total_articles %} Articles</h3>
+		</div>
+		<div class="col-sm-6">
+			<form id="searchform">
+			  <input type="text" name="q" id="search" placeholder="Search...">
+			</form>
+		</div>
+	</div>
+	<hr>
+
 	<div class="row">
 		<div class="col-sm-8" id="searchresults">
 			{% for article in my_object_list %}
 				<div class="thumbnail">
 					<div class="caption">
-						<h3>
-							<a href="{{ article.get_absolute_url }}">
-								<h2>{{article.title}}</h2>
-							</a>
-							<p>{{ article.content }}</p>
-						</h3>
+						<a href="{{ article.get_absolute_url }}">
+							<h4>{{article.title}}</h4>
+						</a>
+						<p>{{ article.content |truncatechars:215 }}</p>
 					</div>
 				</div>
+				<hr>
 			{% endfor %}
 		</div>
 
 		<div class="col-sm-4">
-			<div>
-				<h3>Search for Articles</h3>
-				<form method="POST" id="searchform">
-					{% csrf_token %}
-				  <input type="text" name="q" id="search" placeholder="Search...">
-				</form>
-			</div>
-
+			
 		{# ################### Cartegories #################### #}
-			<hr>
+
 			<h4>Categories</h4>
 			<ol class="list-unstyled">
 			  <li {% if not category %} class="active"{% endif %}>
@@ -101,7 +104,7 @@
 					  {% if not forloop.last %}, {% endif %}
 					{% endfor %}
 				  	</p>
-		  </div>
+		  	</div>
 		<!-- </div> -->
 	{% include "includes/pagination.html" with page=articles %}
   </div>

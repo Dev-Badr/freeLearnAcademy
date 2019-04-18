@@ -100,7 +100,7 @@ class TrackBase(models.Model):
 class Course(TrackBase):
 
 	overview = models.TextField(_('المقدمة'), blank=True)
-	image = models.ImageField(_('صورة'), upload_to='courses/img/%Y/%m/%d', blank=True)
+	# image = models.ImageField(_('صورة'), upload_to='courses/img/%Y/%m/%d', blank=True)
 	joines = models.PositiveIntegerField(_("اجمالي المنضمون"), default=0)
 
 	# V 3.x
@@ -126,7 +126,7 @@ class Course(TrackBase):
 class Unit(TrackBase):
 
 	course = models.ForeignKey(Course, related_name='units', on_delete=models.CASCADE, verbose_name=_("الكورس"))
-	img = models.ImageField(_('صورة'), upload_to='courses/unit/img/%Y/%m/%d', blank=True)
+	# image = models.ImageField(_('صورة'), upload_to='courses/unit/img/%Y/%m/%d', blank=True)
 	last_lecture = models.PositiveIntegerField(blank=True, null=True)
 	# order field can't tack verbose-name 1st argument
 	order = OrderField(blank=True, for_fields=['course'], verbose_name=_('الترتيب'))
@@ -261,7 +261,7 @@ class Track(TrackBase):
 	articles  = models.ManyToManyField(Article, related_name='track', verbose_name=_("مقالات"))
 	practices  = models.ManyToManyField(Practice, related_name='track', verbose_name=_("تمارين"))
 
-	image = models.ImageField(_('صورة'), upload_to='tracks/img/%Y/%m/%d', blank=True)
+	# image = models.ImageField(_('صورة'), upload_to='tracks/img/%Y/%m/%d', blank=True)
 
 	class Meta:
 		verbose_name = _("مسار")

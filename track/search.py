@@ -1,15 +1,13 @@
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render
 from django.db.models import Q
 from .forms import SearchForm
 from .models import Article, Course
 
-@csrf_protect
 def article_search(request):
 
-	cd = request.POST['q']
+	cd = request.GET['q']
 
 	articles = None
 
@@ -31,10 +29,10 @@ def article_search(request):
 
 	return render(request, 'track/search/article_search.html', context)
 
-@csrf_protect
+
 def course_search(request):
 
-	cd = request.POST['q']
+	cd = request.GET['q']
 	courses = None
 
 	if cd == "":

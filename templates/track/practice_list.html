@@ -9,17 +9,24 @@
 	<div class="row">
 		<div class="col-md-8">
 		{% if not category %}
-			<h1>Learn With {% total_practices %} Practices</h1>
+			<h3>Learn with {% total_practices %} practices</h3>
 		{% else %}
-			<h1>{{ category.practices.count }} Practices</h1>
+			<h3>{{ category.practices.count }} practices</h3>
 		{% endif %}
-
 				
-			{% for practice in my_object_list %}
-			<a href="{{ practice.get_absolute_url }}">
-				<h3>{{practice.title}}</h3></a>
-			  <p>{{ practice.content }}</p>
-				{% endfor %}
+		{% for practice in my_object_list %}
+
+		  <div class="thumbnail">
+				<div class="caption">
+					<a href="{{ practice.get_absolute_url }}">
+						<h4>{{practice.title}}</h4>
+					</a>
+					<p>{{ practice.content |truncatechars:215 }}</p>
+				</div>
+			</div>
+			<hr>
+
+		{% endfor %}
 		</div>
 		{# ################### Cartegories #################### #}
 		<div class="col-md-4">

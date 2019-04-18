@@ -3,7 +3,7 @@
 	{% if not cd == '' %}
 		<div id="header_search">
 			<br/>
-			<h2 id="data">Search containing "{{ cd }}"</h2>
+			<h2 id="data">Search containing "{{ cd|safe }}"</h2>
 			<h3 id="total">Found {{ total_results }} result{{ total_results|pluralize }}</h3>
 			<br/>
 		</div>
@@ -12,15 +12,13 @@
 	{% for article in articles %}
 		<div class="thumbnail">
 			<div class="caption">
-				<h3>
-					<a href="{{ article.get_absolute_url }}">
-						<h2>{{article.title}}</h2>
-					</a>
-					<p>{{ article.content }}</p>
-				</h3>
+				<a href="{{ article.get_absolute_url }}">
+					<h4>{{article.title}}</h4>
+				</a>
+				<p>{{ article.content |truncatechars:215 }}</p>
 			</div>
-			<hr>
 		</div>
+		<hr>
 	{% endfor %}
 {% else %}
     <h3>No results</h3>
