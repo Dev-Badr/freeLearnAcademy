@@ -32,11 +32,6 @@ from django.utils.translation import ugettext_lazy as _
 #     # 'practices': PracticeSitemap,
 # }
 
-
-
-
-handler404 = 'track.handle_errors.handler404'
-
 urlpatterns = [
 
     path('admin/', admin.site.urls),
