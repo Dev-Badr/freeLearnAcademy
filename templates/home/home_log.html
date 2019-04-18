@@ -8,63 +8,65 @@
       <div class="col-sm-12 blog-main">
         <div class="blog-post">
             <div class="row">
-                {% for track in tracks %}
-                    <div class="col-md-4">
-                      <div class="thumbnail">
-                          <a href="{{ track.get_absolute_url }}" style="margin: 0 auto">
-                              <img src="{% static 'img/default.jpg' %}" alt="..." 
-                              style="height: 130px; width: auto">
-                          </a>
-                          <div class="caption">
-                              <h3 class="text-center" style="margin: 0 auto">
-                                  <a href="{{ track.get_absolute_url }}">{{ track.title }}</a>
-                              </h3>
-                              <p class="text-center">{{ track.content }}</p>
-                              <br>
-                              </p>
-                              <hr>
-                          </div>
-                      </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="row">
-              <div class="col-md-8">
-                      <div class="card mb-3">
-
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <a href="{% url 'track:article-list' %}"><h5 class="card-title">مقالات</h5></a>
-                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              {% for track in tracks %}
+                  <div class="col-md-4">
+                    <div class="thumbnail">
+                        <a href="{{ track.get_absolute_url }}" style="margin: 0 auto">
+                            <img src="{% static 'img/default.jpg' %}" alt="..." 
+                            style="height: 130px; width: auto">
+                        </a>
+                        <div class="caption">
+                            <h3 class="text-center" style="margin: 0 auto">
+                                <a href="{{ track.get_absolute_url }}">{{ track.title }}</a>
+                            </h3>
+                            <p class="text-center">{{ track.content }}</p>
+                            <br>
+                            </p>
+                            <hr>
                         </div>
-                      </div>
-
-                      <div class="card mb-3">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <a href="{% url 'track:practice-list' %}"><h5 class="card-title">تمارين</h5></a>
-                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                      </div>
-
-                    </div>
-                    <div class="col-md-4">
-                    <h5>Latest Articles</h5>
-                    <div class="row">
-                      <ul>
-                        {% for article in articles %}
-                        <li><a href="{{ article.get_absolute_url }}">{{ article.title }}
-                          </a>
-                        </li>
-                        {% endfor %}
-                      </ul>
                     </div>
                   </div>
+              {% endfor %}
             </div>
-        </div><!-- /.blog-post -->
+            <div class="row">
 
+              <div class="col-md-8">
+
+                <div class="card card-accent-primary mb-3" style="max-width: 40rem;">
+                  <a href="{% url 'track:article-list' %}"><div class="card-header"><h5>Articles</h5></div></a>
+                  <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+
+                <div class="card card-accent-primary mb-3" style="max-width: 40rem;">
+                  <a href="{% url 'track:practice-list' %}"><div class="card-header"><h5>Practices</h5></div></a>
+                  <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-4">
+              <h5>Latest Articles</h5>
+              <div class="row">
+                <ul>
+                  {% for article in articles %}
+                  <li>
+                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /.blog-post -->
       </div><!-- /.blog-main -->
     </div>
   </div>
