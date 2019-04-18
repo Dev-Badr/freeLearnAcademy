@@ -1,5 +1,13 @@
 # freeLearnAcademy
 
+### Run the following commands to get started:
+
+```json
+virtualenv env
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
 
 ### Found a bug?
 
@@ -9,4 +17,4 @@ If you think you've found a bug, If you're confident it's a new bug, and have co
 
 Please don't create GitHub issues for security issues. Instead, please send an email to `badrk.shokr@gmail.com` and we'll look into it immediately.
 
-#### It is run by [Dev-Badr](https://github.com/Dev-Badr).
+#### It is run by [Badr Kamel](https://github.com/badrkamel).
