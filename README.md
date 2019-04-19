@@ -2,7 +2,7 @@
 
 ### Run the following commands to get started:
 
-```json
+```
 virtualenv env
 pip install -r requirements.txt
 python manage.py migrate
@@ -15,6 +15,6 @@ If you think you've found a bug, If you're confident it's a new bug, and have co
 
 ### Found a security issue?
 
-Please don't create GitHub issues for security issues. Instead, please send an email to `badrk.shokr@gmail.com` and we'll look into it immediately.
+Please don't create GitHub issues for security issues. Instead, please send an email to `badrk.shokr@gmail.com` and i'll look into it immediately.
 
 #### It is run by [Badr Kamel](https://github.com/badrkamel).
