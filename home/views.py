@@ -62,7 +62,7 @@ def search_results(request):
 
     users = User.objects.filter(
         Q(username__icontains=cleandata)).all()
-
+    
     total_results = articles.count() + \
         courses.count() + users.count()
 

@@ -38,9 +38,10 @@
 		<h3>Profiles</h3>
 		{% for user in users %}
 		    <div>
-		    <img width="40" height="50" alt="" src="{{ user.profile.photo.url }}">
+		    <img width="40" height="50" alt="user profile" src="{{ user.profile.photo.url }}">
 		    <a href="{{ user.profile.get_absolute_url }}" class="btn btn-primary">
-		    	{{ user.username }}</a>
+		    	{{ user.username }}
+		    </a>
 		    </div>
 		    <br/>
 		{% endfor %}
