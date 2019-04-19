@@ -22,10 +22,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from track.models import Course
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
-from .tokens import account_activation_token
+from accounts.tokens import account_activation_token
 from django.core.mail import EmailMessage
-from .models import Profile
-from .forms import *
+from accounts.models import Profile
+from accounts.forms import (
+    LoginForm, 
+    UserRegistrationForm,
+    UserEditForm,
+    ProfileEditForm
+    )
+
 
 @csrf_exempt
 def validate_username(request):
@@ -60,32 +66,33 @@ class RegisterView(FormView):
     template_name = 'registration/register.html'
 
     def form_valid(self, form):
-        new_user = form.save(False)
-        ###
-        new_user.save(True)
-        ### need away that login directly
 
-        ## send confirmations message
-        # current_site = get_current_site(request) # try self.request
-        # message = render_to_string('activate/acc_active_email.html', {
-        #     'user': user,
-        #     'domain': current_site.domain,
-        #     'uid':urlsafe_base64_encode(force_bytes(user.pk)).decode(),
-        #     'token':account_activation_token.make_token(user),
-        # })
+        user = form.save(commit=False)
+        user.is_active = False
+        user.save()
+
+        ## Send confirmation message
+        current_site = get_current_site(self.request)
+        message = render_to_string('activate/acc_active_email.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token':account_activation_token.make_token(user),
+        })
         # # Sending activation link in terminal
-        # # user.email_user(subject, message)
-        # mail_subject = 'Activate your Badr PlatForm account.'
-        # to_email = form.cleaned_data.get('email')
-        # email = EmailMessage(mail_subject, message, to=[to_email])
-        # email.send()
+        # user.email_user(subject, message)
+        mail_subject = 'Activate your freeLearnAcademy account.'
+        to_email = form.cleaned_data.get('email')
+
+        print(f"\n\n {to_email} \n\n")
+
+        email = EmailMessage(mail_subject, message, to=[to_email])
+        email.send()
+        
+        return render(self.request, 'activate/acc_active_sent.html')
         
         # or
-        # return HttpResponse('Please confirm your email address to complete the registration')
-        # or
-        # return render(request, 'acc_active_sent.html')
-
-        return reverse('accounts:login')
+        # return redirect('accounts:login')
 
 
 def activate(request, uidb64, token):
@@ -98,7 +105,11 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+
+        messages.success(request,
+            "Thank you for your email confirmation. Now you can complete your profile settings.")
+
+        return redirect('accounts:edit_account')
     else:
         return HttpResponse('Activation link is invalid!')
 
@@ -120,10 +131,10 @@ class LoginView(FormView):
         form = AuthenticationForm(data=self.request.POST, request=self.request)
 
         if form.is_valid():
-            # remove cash before login
+    
             user = form.get_user()
             if not user.is_active:
-                return HttpResponse("We're Sorry. This account has been deleted.")
+                return HttpResponse("Your account not active yet. Please active your account first and try again.")
             login(self.request, user)
 
             # if we need to do anything on user when login success
@@ -150,7 +161,6 @@ class LogoutView(RedirectView):
         return super(LogoutView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        # remove cash before logout
         logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)
 
@@ -192,9 +202,9 @@ class EditAccountView(LoginRequiredMixin, View):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, '.تم تحديث البيانات بنجاح')
+            messages.success(request, 'Data has been successfully updated.')
         else:
-            messages.error(request, '.برجاء تصحيح الخطأ أدناة')
+            messages.error(request, 'Please correct the error below.')
 
             return reverse('accounts:edit_account')
 

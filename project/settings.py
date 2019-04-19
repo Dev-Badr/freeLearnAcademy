@@ -29,7 +29,7 @@ SECRET_KEY = '^w($1qs%0bpdg_neemjbkt*wn_d4)yhmd5tv6q6=^n3k!g9yc6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', '127.0.0.1', 'example.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -98,10 +98,10 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'platform',
+    #     'NAME': 'freeLearnAcademy',
     #     'USER': 'postgres',
     #     'PASSWORD': os.environ.get('db_PASSWORD'),
-    #     'HOST' : 'localhost' ,
+    #     'HOST' : 'localhost',
     #     'PORT' : '5431',
     #     'charset': 'utf8mb4',
     # }
@@ -143,7 +143,7 @@ REST_FRAMEWORK = {
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'ar-eg'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -170,7 +170,6 @@ LOCALE_PATH = [
     os.path.join(BASE_DIR, 'locale')
 ]
 
-# AUTH_USER_MODEL = 'accounts.MyUser'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = True
