@@ -45,10 +45,9 @@ def home(request):
 def home_search(request):
     return render(request, 'home/search.html')
 
-@csrf_protect
 def search_results(request):
 
-    cleandata = request.POST['q']
+    cleandata = request.GET['q']
     users = None
     courses = None
     articles = Article.published.filter(

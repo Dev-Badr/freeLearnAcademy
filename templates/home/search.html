@@ -21,7 +21,7 @@
 
                         $.ajax({
                             url: "{% url 'home:search-results' %}",
-                            method: "post",
+                            method: "get",
                             data: $(this).parent().serialize(),
                             success: function(data) {
                                 $("#searchresults").html(data);
@@ -45,8 +45,7 @@
         <div class="row">
             <div class="col-md-8">
             <div id = "searchforms">
-                <form method = "post" id = "sform">
-                    {% csrf_token %}
+                <form id = "sform">
                     <h3>Search</h3>
                     <input type="text" name="q" id="name" style="width: 80%"><br/><br/>
                 </form>
