@@ -6,13 +6,19 @@
 {% endblock %}
 
 {% block content %}
+
 	<div class="row">
-		<div class="col-md-8">
 		{% if not category %}
 			<h3>Learn with {% total_practices %} practices</h3>
 		{% else %}
 			<h3>{{ category.practices.count }} practices</h3>
 		{% endif %}
+	</div>
+	<hr>
+
+	<div class="row">
+
+		<div class="col-md-8">
 				
 		{% for practice in my_object_list %}
 
