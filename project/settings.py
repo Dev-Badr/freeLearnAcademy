@@ -52,13 +52,19 @@ INSTALLED_APPS = [
     'track',
     'taggit',
     'embed_video',
+
+    # django rest
     'rest_framework',
+
+    # django rest auth
+    'rest_framework.authtoken',
+    'rest_auth',
     
     # # all auth
-    # 'allauth', # new
-    # 'allauth.account', # new
-    # 'allauth.socialaccount', # new
-    # 'allauth.socialaccount.providers.github', # new
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
