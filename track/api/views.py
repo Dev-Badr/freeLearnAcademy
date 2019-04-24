@@ -35,7 +35,7 @@ from track.api.serializers import (
 # track
 
 class TrackList(ListAPIView):
-	queryset = Track.objects.all()
+	queryset = Track.published.all()
 	serializer_class = TrackSerializer
 
 class TrackDetail(RetrieveAPIView):
@@ -47,11 +47,11 @@ class TrackDetail(RetrieveAPIView):
 # course
 
 class CourseList(ListAPIView):
-	queryset = Course.objects.all()
+	queryset = Course.published.all()
 	serializer_class = CourseSerializer
 
 class CourseDetail(RetrieveAPIView):
-	queryset = Course.objects.all()
+	queryset = Course.published.all()
 	serializer_class = CourseSerializer
 
 ######################################
@@ -59,11 +59,11 @@ class CourseDetail(RetrieveAPIView):
 # unit
 
 class UnitList(ListAPIView):
-	queryset = Unit.objects.all()
+	queryset = Unit.published.all()
 	serializer_class = UnitSerializer
 
 class UnitDetail(RetrieveAPIView):
-	queryset = Unit.objects.all()
+	queryset = Unit.published.all()
 	serializer_class = UnitSerializer
 
 #######################################
@@ -71,11 +71,11 @@ class UnitDetail(RetrieveAPIView):
 # lecuture
 
 class LectureList(ListAPIView):
-	queryset = Lecture.objects.all()
+	queryset = Lecture.published.all()
 	serializer_class = LectureSerializer
 
 class LectureDetail(RetrieveAPIView):
-	queryset = Lecture.objects.all()
+	queryset = Lecture.published.all()
 	serializer_class = LectureSerializer
 
 #######################################
@@ -107,11 +107,11 @@ class CategoryDetail(RetrieveAPIView):
 # article
 
 class ArticleList(ListAPIView):
-	queryset = Article.objects.all()
+	queryset = Article.published.all()
 	serializer_class = ArticleSerializer
 
 class ArticleDetail(RetrieveAPIView):
-	queryset = Article.objects.all()
+	queryset = Article.published.all()
 	serializer_class = ArticleSerializer
 
 #######################################
@@ -119,11 +119,11 @@ class ArticleDetail(RetrieveAPIView):
 # practice
 
 class PracticeList(ListAPIView):
-	queryset = Practice.objects.all()
+	queryset = Practice.published.all()
 	serializer_class = PracticeSerializer
 
 class PracticeDetail(RetrieveAPIView):
-	queryset = Practice.objects.all()
+	queryset = Practice.published.all()
 	serializer_class = PracticeSerializer
 
 # The ModelViewSet class inherits from GenericAPIView and includes implementations for various actions,
@@ -143,5 +143,5 @@ class PracticeDetail(RetrieveAPIView):
 #     """
 #     A simple ViewSet for viewing and editing accounts.
 #     """
-#     queryset = Track.objects.all()
+#     queryset = Track.published.all()
 #     serializer_class = TrackSerializer
