@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from accounts.models import Profile
 from rest_framework.authtoken.models import Token
 
 from rest_framework.serializers import (
@@ -34,3 +35,21 @@ class UserSerializer(serializers.ModelSerializer):
         # if user_qs.exists():
         #     raise ValidationError("This user has already registered.")
         return data
+
+
+# will be costomize later
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(read_only=True, source="user.username")
+    class Meta:
+        model = Profile
+        fields = [
+            'username',
+            # 'email',
+            # 'first_name',
+            # 'last_name',
+            # 'date_joined',
+            # 'is_active',
+            'views',
+            
+        ]

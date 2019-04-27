@@ -13,36 +13,31 @@
 {% block content %}
     <div class="row" style="padding: 1%">
       <div class="col-md-4">
-        <h3 style="text-align: center;">قم بإنشاء حساب جديد الآن</h3>
-        <br>
-        <form method="POST" style="text-align: center;">
-        {% csrf_token %}
-        <p id="u-error" style="color: red"></p>
-        <p id="e-error" style="color: red"></p>
-        {{ form.non_field_errors }}
-        {% for field in form %}
-            {{ field }}
-          {{ field.errors }}
+        <div id="home-auth">
+          <h4 style="text-align: center;">قم بإنشاء حساب جديد الآن</h4>
           <br>
-        {% endfor %}
+          <form method="POST" style="text-align: center;">
+            {% csrf_token %}
+            <p id="u-error" style="color: #edf206"></p>
+            <p id="e-error" style="color: #edf206"></p>
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                {{ field }}
+              {{ field.errors }}
+              <br>
+            {% endfor %}
 
-        <input class="btn btn-md" type="submit" value="Sign up"
-          style="background-color: black;color:white">
-        <br/>
+            <input id="btn-auth" class="btn btn-lg" type="submit" value="تسجيل حساب جديد">
+            <br/>
 
-        {% comment %}
-        <a href="{% provider_login_url 'github' %}">Sign Up Github</a>
+            {% comment %}
+            <a href="{% provider_login_url 'github' %}">LogIn With Github</a>
+            {% endcomment %}
 
-        <input class='btn btn-md btn-success' type="submit" 
-          value="Login with Facebook">
-        <br>
-        <br>
-        <input class='btn btn-md btn-success' type="submit" 
-          value="Login with GitHub">
-        {% endcomment %}
-        <hr>
-        <h4>Already have account <a href="{% url 'accounts:login' %}">login</a></h4>
-        </form>
+            <hr>
+            <h5 style="text-decoration: none;">لديك حساب بالفعل <a href="{% url 'accounts:login' %}"> تسجيل الدخول</a></h5>
+          </form>
+        </div>
       </div>
       <div class="col-md-8">
         <h3 style="text-align: right;">

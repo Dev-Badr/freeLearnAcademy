@@ -26,10 +26,10 @@ from accounts.tokens import account_activation_token
 from django.core.mail import EmailMessage
 from accounts.models import Profile
 from accounts.forms import (
-    LoginForm, 
-    UserRegistrationForm,
-    UserEditForm,
-    ProfileEditForm
+        LoginForm, 
+        UserRegistrationForm,
+        UserEditForm,
+        ProfileEditForm
     )
 
 
@@ -42,7 +42,7 @@ def validate_username(request):
     }
 
     if data['is_taken']:
-        data['error_message'] = 'A user with this username already exists.'
+        data['error_message'] = 'This username already exists.'
 
     return JsonResponse(data)
 
@@ -55,7 +55,7 @@ def validate_email(request):
     }
 
     if data['is_taken']:
-        data['error_message'] = 'A user with this email already exists.'
+        data['error_message'] = 'This email already exists.'
 
     return JsonResponse(data)
 

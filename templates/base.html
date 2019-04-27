@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <title>Badr | {% block title %}{% endblock %}</title>
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {% block style %}
     
     {% endblock %}
 </head>
-<body>
+<body style="background-color: #f9f9f9;">
 
   {% include 'includes/navbar.html' %}
 

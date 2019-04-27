@@ -7,9 +7,8 @@
 {% endblock %}
 
 {% block content %}
-
-<form class = "register-form" method="POST" style="text-align: center">
-    <div class="col-md-6" style="display: inline-block;">
+<div id="form-auth">
+    <form class = "register-form" method="POST">
         {% csrf_token %}
         <p id="u-error" style="color: red"></p>
         <p id="e-error" style="color: red"></p>
@@ -19,7 +18,7 @@
             {{ field.errors }}
             <br>
         {% endfor %}
-        <input type="submit" value='Signup'>
-    </div>
-</form>
+        <input id="btn-auth" class="btn btn-lg" type="submit" value="تسجيل حساب جديد">
+    </form>
+</div>
 {% endblock %}

@@ -3,20 +3,24 @@
 {% block title %} Login{% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        {% for field in form %}
-            {{ field }}
-            {{ field.errors }}
+    <h3 style="text-align: center;">مرحباً بعوتدك</h3>
+    <div id="form-auth">
+        <h4 style="text-align: center;">تسجيل الدخول الي المنصة</h4>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                {{ field }}
+                {{ field.errors }}
+                <br>
+            {% endfor %}
+            <input id="btn-auth" class="btn btn-md" type="submit" value="تسجيل الدخول">
             <br>
-        {% endfor %}
-        <input type="submit" value="Login">
-    </form>
-    <p><a href="{% url 'accounts:password_reset' %}">Lost password?</a></p>
-    <p class="text-center">
-        <a href="{% url 'accounts:signup' %}">Create Account</a>
-        |
-        <a href="/">Home Page</a>
-    </p>
+            <p><a href="{% url 'accounts:password_reset' %}">فقدت كلمة السر؟</a></p>
+        </form>
+        <p class="text-center">
+            عضو جديد  <a href="{% url 'accounts:signup' %}">انشاء حساب </a>
+        </p>
+    </div>
 {% endblock %}
