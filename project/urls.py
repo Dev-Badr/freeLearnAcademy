@@ -39,10 +39,10 @@ urlpatterns = [
 
     # all auth
     # path('auth/', include('allauth.urls')),
+    
     path('', include('home.urls', namespace='home')),
     path('api/v1/', include('track.api.urls', namespace='api-track')),
     path('', include('track.urls', namespace='track')),
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('rest-auth/', include('rest_auth.urls')),
     path('man-rest-auth/', include('accounts.api.urls')),
 

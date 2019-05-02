@@ -5,10 +5,6 @@ def handler404(request):
  # #        logger.error(exception)
  #    url = request.get_full_path()
     return render(request, 'error_pages/error_page.html', status=404) # {'url':url,}
-    
-# def handler500(request):
-#     return render(request, 'error_pages/error_page.html', status=500)
-
 
 
 # def page_not_found_view(request, exception, template_name='error_page.html'):
