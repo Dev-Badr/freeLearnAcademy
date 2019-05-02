@@ -26,11 +26,9 @@ from accounts.tokens import account_activation_token
 from django.core.mail import EmailMessage
 from accounts.models import Profile
 from accounts.forms import (
-        LoginForm, 
-        UserRegistrationForm,
-        UserEditForm,
-        ProfileEditForm
-    )
+    LoginForm, UserRegistrationForm,
+    UserEditForm, ProfileEditForm
+)
 
 
 @csrf_exempt
