@@ -8,7 +8,6 @@ from .models import Article, Course
 def article_search(request):
 
 	cd = request.GET['q']
-
 	articles = None
 
 	if cd == "":
@@ -17,7 +16,8 @@ def article_search(request):
 		articles = Article.published.filter(
 			Q(title__icontains=cd) |
 			Q(content__icontains=cd) |
-			Q(publish__icontains=cd)).all()
+			Q(publish__icontains=cd)
+		).all()
 
 	total_results = articles.count()
 	print(articles)
@@ -41,7 +41,8 @@ def course_search(request):
 		courses = Course.published.filter(
 			Q(title__icontains=cd) |
 			Q(content__icontains=cd) |
-			Q(publish__icontains=cd)).all()
+			Q(publish__icontains=cd)
+		).all()
 
 	total_results = courses.count()
 	context = {

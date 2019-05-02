@@ -1,6 +1,10 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import *
+
+from .models import (
+    Content, Track, Course, Unit, Lecture, Video, Article, 
+    Practice,CourseMember, Category, Image, File, Text
+)
 
 ##
 admin.site.register(Content)
