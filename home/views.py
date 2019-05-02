@@ -53,18 +53,20 @@ def search_results(request):
     articles = Article.published.filter(
         Q(title__icontains=cleandata) |
         Q(content__icontains=cleandata) |
-        Q(publish__icontains=cleandata)).all()
+        Q(publish__icontains=cleandata)
+    ).all()
 
     courses = Course.published.filter(
         Q(title__icontains=cleandata) |
         Q(content__icontains=cleandata) |
-        Q(publish__icontains=cleandata)).all()
+        Q(publish__icontains=cleandata)
+    ).all()
 
     users = User.objects.filter(
-        Q(username__icontains=cleandata)).all()
+        Q(username__icontains=cleandata)
+    ).all()
     
-    total_results = articles.count() + \
-        courses.count() + users.count()
+    total_results = articles.count() + courses.count() + users.count()
 
     context = {
         'articles':articles,
@@ -73,44 +75,3 @@ def search_results(request):
         'courses':courses, 'users':users,
     }
     return render(request, 'home/search_results.html', context)
-
-
-
-# class HomeSearch(View):
-
-#     template_name = 'home/search.html'
-
-#     def get(self, request, *args, **kwargs):
-
-#         cleandata = ''
-#         articles = None
-#         users = None
-#         courses = None
-#         total_results = 0
-
-#         form = SearchForm()
-#         if 'query' in request.GET:
-#             form = SearchForm(request.GET)
-#             if form.is_valid():
-#                 cleandata = form.cleaned_data['query']
-
-#                 articles = Article.published.filter(
-#                     Q(title__icontains=cleandata) |
-#                     Q(content__icontains=cleandata) |
-#                     Q(publish__icontains=cleandata)).all()
-
-#                 courses = Course.published.filter(
-#                     Q(title__icontains=cleandata) |
-#                     Q(content__icontains=cleandata) |
-#                     Q(publish__icontains=cleandata)).all()
-
-#                 users = User.objects.filter(
-#                     Q(username__icontains=cleandata)).all()
-
-#                 total_results = articles.count() + \
-#                 courses.count() + users.count()
-
-#         context = {'form': form, 'users':users, 'articles':articles,
-#                     'cleandata':cleandata, 'total_results':total_results, 'courses':courses}
-
-#         return render(request, self.template_name, context)
